@@ -124,20 +124,26 @@ publishMods {
     type = STABLE
     modLoaders.add("fabric")
 
-    modrinth {
-        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
-        // The slug works here; swap in the 8-character project ID if the slug ever changes.
-        projectId = "illuminaticraft"
-        minecraftVersions.add(project.minecraft_version)
-        requires {
-            slug = "fabric-api"
+    // The plugin requires the 8-character Modrinth project ID, NOT the slug.
+    // Find it on the project page sidebar ("Project ID") or in Settings -> General.
+    // Leave modrinth_project_id empty in gradle.properties to skip Modrinth entirely.
+    if (project.findProperty("modrinth_project_id")?.trim()) {
+        modrinth {
+            accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+            projectId = project.modrinth_project_id.trim()
+            minecraftVersions.add(project.minecraft_version)
+            requires {
+                slug = "fabric-api"
+            }
+            optional {
+                slug = "cloth-config"
+            }
+            optional {
+                slug = "modmenu"
+            }
         }
-        optional {
-            slug = "cloth-config"
-        }
-        optional {
-            slug = "modmenu"
-        }
+    } else {
+        logger.lifecycle("==> modrinth_project_id is empty, skipping Modrinth publishing")
     }
 }
 

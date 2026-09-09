@@ -138,3 +138,24 @@ section) and that the class sits in the `fr.illuminaticraft.mixin` package.
 - It must be named exactly `illuminati_theme.ogg` / `illuminati_confirmed.ogg`.
 - The **Jukebox/Records** volume slider must be above 0 — the mod's sounds use the
   `record` category.
+
+### `<slug> is not a valid Modrinth ID`
+
+`mod-publish-plugin` fails with:
+
+```
+> A failure occurred while executing ...modrinth.Modrinth$UploadWorkAction
+   > illuminaticraft is not a valid Modrinth ID
+```
+
+The plugin wants the **8-character base62 project ID**, not the URL slug. Find it on the
+Modrinth project page sidebar under "Project ID", or in Settings → General, and put it in
+`gradle.properties`:
+
+```properties
+modrinth_project_id=AbCdEfGh
+```
+
+Leaving that property empty disables Modrinth publishing entirely: `publishMods` then has
+no platform configured and succeeds without doing anything, so the release workflow still
+passes.
