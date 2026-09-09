@@ -70,7 +70,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Runs last so a Modrinth hiccup never costs the GitHub release.
-      # Skipped entirely when the MODRINTH_TOKEN secret is not set.
+      # Fails loudly when the token is missing: a silently skipped step would leave
+      # the job green while nothing was ever published.
       - name: Publish to Modrinth
-        if: env.MODRINTH_TOKEN != ''
-        run: ./gradlew publishMods --stacktrace
+        run: |
+          if [ -z "$MODRINTH_TOKEN" ]; then
+            echo "::error::The MODRINTH_TOKEN secret is empty or not set on this repository."
+            echo "Create it under Settings > Secrets and variables > Actions > Repository secrets,"
+            echo "named exactly MODRINTH_TOKEN."
+            exit 1
+          fi
+          echo "MODRINTH_TOKEN is present (${#MODRINTH_TOKEN} characters)"
+          ./gradlew publishMods --stacktrace

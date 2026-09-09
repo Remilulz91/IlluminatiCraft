@@ -128,6 +128,7 @@ publishMods {
     // Find it on the project page sidebar ("Project ID") or in Settings -> General.
     // Leave modrinth_project_id empty in gradle.properties to skip Modrinth entirely.
     if (project.findProperty("modrinth_project_id")?.trim()) {
+        logger.lifecycle("==> Modrinth publishing enabled for project ${project.modrinth_project_id.trim()}")
         modrinth {
             accessToken = providers.environmentVariable("MODRINTH_TOKEN")
             projectId = project.modrinth_project_id.trim()
