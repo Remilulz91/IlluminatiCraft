@@ -13,6 +13,16 @@
   "illuminaticraft.pet.confirmed": "★ ILLUMINATI CONFIRMED ★",
   "illuminaticraft.pet.confirmed.broadcast": "★ %s got an Illuminati from an Illuminati. ILLUMINATI CONFIRMED ★",
 
+  "illuminaticraft.command.given": "✦ %s Illuminati Pet(s) handed out",
+  "illuminaticraft.command.info.header": "=== IlluminatiCraft ===",
+  "illuminaticraft.command.info.cache": "Drawable items cached: %s",
+  "illuminaticraft.command.info.cooldown": "Cooldown: %s s",
+  "illuminaticraft.command.info.crafting_only": "Crafting recipes only: %s",
+  "illuminaticraft.command.info.self_draw": "Forced self-draw chance: %s %%",
+  "illuminaticraft.command.info.chest_loot": "Chest loot: %s (%s %%)",
+  "illuminaticraft.command.reloaded": "✔ Config reloaded — %s drawable items",
+  "illuminaticraft.command.cooldown_reset": "✔ Cooldown reset for %s player(s)",
+
   "subtitles.illuminaticraft.illuminati_theme": "Ominous music",
   "subtitles.illuminaticraft.illuminati_confirmed": "Illuminati confirmed",
 

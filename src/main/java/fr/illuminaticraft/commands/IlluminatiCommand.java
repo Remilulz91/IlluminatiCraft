@@ -19,7 +19,10 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Commandes d'administration : /illuminati ...
+ * Admin commands: /illuminati ...
+ *
+ * All feedback goes through translation keys so the output follows the client
+ * language instead of being hardcoded.
  */
 public class IlluminatiCommand {
 
@@ -30,7 +33,7 @@ public class IlluminatiCommand {
         dispatcher.register(CommandManager.literal("illuminati")
                 .requires(source -> source.hasPermissionLevel(2))
 
-                // /illuminati give [joueurs] [nombre]
+                // /illuminati give [players] [count]
                 .then(CommandManager.literal("give")
                         .executes(ctx -> give(ctx, List.of(ctx.getSource().getPlayerOrThrow()), 1))
                         .then(CommandManager.argument("targets", EntityArgumentType.players())
@@ -48,7 +51,7 @@ public class IlluminatiCommand {
                 .then(CommandManager.literal("reload")
                         .executes(IlluminatiCommand::reload))
 
-                // /illuminati cooldown reset [joueurs]
+                // /illuminati cooldown reset [players]
                 .then(CommandManager.literal("cooldown")
                         .then(CommandManager.literal("reset")
                                 .executes(ctx -> resetCooldown(ctx, List.of(ctx.getSource().getPlayerOrThrow())))
@@ -69,7 +72,8 @@ public class IlluminatiCommand {
         }
         final int total = count * targets.size();
         ctx.getSource().sendFeedback(
-                () -> Text.literal("✦ " + total + " Illuminati Pet distribué(s)").formatted(Formatting.GOLD),
+                () -> Text.translatable("illuminaticraft.command.given", String.valueOf(total))
+                        .formatted(Formatting.GOLD),
                 true);
         return total;
     }
@@ -78,17 +82,20 @@ public class IlluminatiCommand {
         IlluminatiCraftConfig cfg = IlluminatiCraftConfig.get();
         ServerCommandSource source = ctx.getSource();
 
-        source.sendFeedback(() -> Text.literal("=== IlluminatiCraft ===").formatted(Formatting.GOLD), false);
-        source.sendFeedback(() -> Text.literal("Items piochables en cache : " + RandomItemPicker.size())
+        source.sendFeedback(() -> Text.translatable("illuminaticraft.command.info.header")
+                .formatted(Formatting.GOLD), false);
+        source.sendFeedback(() -> Text.translatable("illuminaticraft.command.info.cache",
+                String.valueOf(RandomItemPicker.size())).formatted(Formatting.GRAY), false);
+        source.sendFeedback(() -> Text.translatable("illuminaticraft.command.info.cooldown",
+                String.valueOf(cfg.cooldownSeconds)).formatted(Formatting.GRAY), false);
+        source.sendFeedback(() -> Text.translatable("illuminaticraft.command.info.crafting_only",
+                String.valueOf(cfg.craftingRecipesOnly)).formatted(Formatting.GRAY), false);
+        source.sendFeedback(() -> Text.translatable("illuminaticraft.command.info.self_draw",
+                String.valueOf(cfg.selfDrawBoostPercent)).formatted(Formatting.GRAY), false);
+        source.sendFeedback(() -> Text.translatable("illuminaticraft.command.info.chest_loot",
+                String.valueOf(cfg.enableChestLoot),
+                String.format(java.util.Locale.ROOT, "%.1f", cfg.chestLootChance * 100f))
                 .formatted(Formatting.GRAY), false);
-        source.sendFeedback(() -> Text.literal("Cooldown : " + cfg.cooldownSeconds + " s")
-                .formatted(Formatting.GRAY), false);
-        source.sendFeedback(() -> Text.literal("Recettes de craft uniquement : " + cfg.craftingRecipesOnly)
-                .formatted(Formatting.GRAY), false);
-        source.sendFeedback(() -> Text.literal("Chance d'auto-invocation forcée : " + cfg.selfDrawBoostPercent + " %")
-                .formatted(Formatting.GRAY), false);
-        source.sendFeedback(() -> Text.literal("Loot en coffre : " + cfg.enableChestLoot
-                + " (" + (cfg.chestLootChance * 100f) + " %)").formatted(Formatting.GRAY), false);
         return 1;
     }
 
@@ -96,8 +103,8 @@ public class IlluminatiCommand {
         IlluminatiCraftConfig.load();
         RandomItemPicker.rebuild(ctx.getSource().getServer());
         ctx.getSource().sendFeedback(
-                () -> Text.literal("✔ Config rechargée — " + RandomItemPicker.size() + " items piochables")
-                        .formatted(Formatting.GREEN),
+                () -> Text.translatable("illuminaticraft.command.reloaded",
+                        String.valueOf(RandomItemPicker.size())).formatted(Formatting.GREEN),
                 true);
         return 1;
     }
@@ -108,7 +115,9 @@ public class IlluminatiCommand {
             player.getItemCooldownManager().remove(ModItems.ILLUMINATI_PET);
         }
         ctx.getSource().sendFeedback(
-                () -> Text.literal("✔ Cooldown réinitialisé").formatted(Formatting.GREEN), true);
+                () -> Text.translatable("illuminaticraft.command.cooldown_reset",
+                        String.valueOf(targets.size())).formatted(Formatting.GREEN),
+                true);
         return targets.size();
     }
 }

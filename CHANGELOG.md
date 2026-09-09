@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.1
+
+### Fixed
+
+- `/illuminati` command feedback was hardcoded in French and ignored the client
+  language. All command output now goes through translation keys and is available in
+  English and French.
+
+### Verified in game
+
+First runtime pass on Minecraft 1.21.1: recipe cache (891 drawable items in pure
+vanilla), right-click draw, "Illuminati Confirmed" achievement with its sound, crafting
+recipe, and chest loot injection all confirmed working.
+
 ## 0.1.0 — first release
 
 ### Added
