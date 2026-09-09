@@ -1,0 +1,46 @@
+{
+  "_comment": "IlluminatiCraft — Traductions françaises",
+
+  "item.illuminaticraft.illuminati_pet": "Illuminati Pet",
+
+  "illuminaticraft.pet.tooltip.line1": "Clic droit : un item craftable au hasard (vanilla + mods)",
+  "illuminaticraft.pet.tooltip.line2": "Cooldown : %s secondes",
+
+  "illuminaticraft.pet.drawn": "▲ Tu reçois : %s x%s",
+  "illuminaticraft.pet.drawn.broadcast": "▲ %s a reçu %s x%s de l'Illuminati",
+  "illuminaticraft.pet.cooldown": "▲ L'Illuminati se recharge... %s s",
+  "illuminaticraft.pet.no_recipes": "▲ Aucune recette disponible pour le tirage",
+  "illuminaticraft.pet.confirmed": "★ ILLUMINATI CONFIRMED ★",
+  "illuminaticraft.pet.confirmed.broadcast": "★ %s a obtenu un Illuminati depuis un Illuminati. ILLUMINATI CONFIRMED ★",
+
+  "subtitles.illuminaticraft.illuminati_theme": "Musique inquiétante",
+  "subtitles.illuminaticraft.illuminati_confirmed": "Illuminati confirmed",
+
+  "advancements.illuminaticraft.root.title": "Illuminati",
+  "advancements.illuminaticraft.root.description": "Obtiens un Illuminati Pet",
+  "advancements.illuminaticraft.confirmed.title": "Illuminati Confirmed",
+  "advancements.illuminaticraft.confirmed.description": "Obtiens un Illuminati depuis un Illuminati",
+
+  "config.illuminaticraft.title": "Configuration d'IlluminatiCraft",
+  "config.illuminaticraft.category.ability": "Ability",
+  "config.illuminaticraft.category.sounds": "Sons",
+  "config.illuminaticraft.category.obtaining": "Obtention",
+  "config.illuminaticraft.restart_required": "Nécessite un redémarrage du jeu",
+
+  "config.illuminaticraft.cooldownSeconds": "Cooldown (secondes)",
+  "config.illuminaticraft.cooldownSeconds.tooltip": "Délai entre deux utilisations. Inventory Pets : 120 s.",
+  "config.illuminaticraft.craftingRecipesOnly": "Recettes de craft uniquement",
+  "config.illuminaticraft.craftingRecipesOnly.tooltip": "Si désactivé, les recettes de fourneau, forge, etc. sont aussi piochables.",
+  "config.illuminaticraft.giveFullRecipeOutput": "Donner la quantité complète de la recette",
+  "config.illuminaticraft.selfDrawBoostPercent": "Chance forcée d'auto-invocation (%)",
+  "config.illuminaticraft.selfDrawBoostPercent.tooltip": "0 = 100 % aléatoire (le succès devient quasi inatteignable).",
+  "config.illuminaticraft.broadcastDraws": "Annoncer chaque tirage au serveur",
+  "config.illuminaticraft.enableCustomSounds": "Activer les sons custom",
+  "config.illuminaticraft.dropSoundGlobal": "Son du drop entendu par tout le serveur",
+  "config.illuminaticraft.dropSoundGlobal.tooltip": "Sinon, seulement les joueurs à proximité.",
+  "config.illuminaticraft.soundVolume": "Volume des sons custom",
+  "config.illuminaticraft.addToCreativeTab": "Ajouter au menu créatif",
+  "config.illuminaticraft.enableChestLoot": "Apparition dans les coffres",
+  "config.illuminaticraft.chestLootChance": "Chance en coffre (0.0 – 1.0)",
+  "config.illuminaticraft.chestLootChance.tooltip": "0.02 = 2 % par coffre de structure concernée."
+}

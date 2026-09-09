@@ -1,0 +1,31 @@
+{
+  "parent": "illuminaticraft:root",
+  "display": {
+    "icon": {
+      "id": "illuminaticraft:illuminati_pet"
+    },
+    "title": {
+      "translate": "advancements.illuminaticraft.confirmed.title"
+    },
+    "description": {
+      "translate": "advancements.illuminaticraft.confirmed.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  }
+}

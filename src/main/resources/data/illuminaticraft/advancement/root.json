@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "id": "illuminaticraft:illuminati_pet"
+    },
+    "title": {
+      "translate": "advancements.illuminaticraft.root.title"
+    },
+    "description": {
+      "translate": "advancements.illuminaticraft.root.description"
+    },
+    "background": "minecraft:textures/block/obsidian.png",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_pet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "illuminaticraft:illuminati_pet"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pet"
+    ]
+  ]
+}

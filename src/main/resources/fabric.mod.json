@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "illuminaticraft",
+  "version": "${version}",
+  "name": "IlluminatiCraft",
+  "description": "The Illuminati Pet from Inventory Pets, rebuilt for Fabric. Right-click to receive a random craftable item from vanilla AND from every mod installed. Get an Illuminati from an Illuminati to unlock a very special achievement. 2 minute cooldown between uses.",
+  "authors": [
+    "Remilulz_91"
+  ],
+  "contact": {
+    "sources": "https://github.com/Remilulz91/IlluminatiCraft",
+    "issues": "https://github.com/Remilulz91/IlluminatiCraft/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/illuminaticraft/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "fr.illuminaticraft.IlluminatiCraft"
+    ],
+    "client": [
+      "fr.illuminaticraft.client.IlluminatiCraftClient"
+    ],
+    "modmenu": [
+      "fr.illuminaticraft.client.config.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "illuminaticraft.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "~${minecraft_version}",
+    "java": ">=21"
+  },
+  "recommends": {
+    "cloth-config": "*",
+    "modmenu": "*"
+  }
+}

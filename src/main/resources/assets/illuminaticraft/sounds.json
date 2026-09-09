@@ -1,0 +1,22 @@
+{
+  "illuminati_theme": {
+    "category": "record",
+    "subtitle": "subtitles.illuminaticraft.illuminati_theme",
+    "sounds": [
+      {
+        "name": "illuminaticraft:illuminati_theme",
+        "stream": true
+      }
+    ]
+  },
+  "illuminati_confirmed": {
+    "category": "record",
+    "subtitle": "subtitles.illuminaticraft.illuminati_confirmed",
+    "sounds": [
+      {
+        "name": "illuminaticraft:illuminati_confirmed",
+        "stream": true
+      }
+    ]
+  }
+}
