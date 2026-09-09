@@ -83,6 +83,9 @@ jar {
     from("LICENSE") {
         rename { "${it}_${project.archives_base_name}" }
     }
+    // CC BY 4.0 : l'attribution doit voyager avec le fichier redistribué,
+    // donc CREDITS.md est embarqué dans le JAR.
+    from("CREDITS.md")
 }
 
 // configure the maven publication

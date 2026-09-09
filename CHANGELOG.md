@@ -24,5 +24,9 @@
 
 ### Notes
 
-- Les deux fichiers `.ogg` livrés sont des **placeholders silencieux** — voir la section
-  « Sons » du README.
+- `illuminati_confirmed.ogg` : *Also sprach Zarathustra* dirigé par Philip Milman,
+  CC BY 4.0 — attribution dans `CREDITS.md`, embarqué dans le JAR.
+- `illuminati_theme.ogg` : **placeholder silencieux**, aucune version sous licence libre
+  du thème X-Files n'existe. Voir la section « Sons » du README.
+- CI : Fabric Loom 1.7 est incompatible Gradle 9, les workflows forcent Gradle 8.10 via
+  le wrapper.

@@ -73,36 +73,43 @@ Cloth Config**.
 
 ---
 
-## Sons — à lire avant de publier
+## Sons
 
-Le dépôt contient **deux fichiers `.ogg` silencieux de 3 secondes**, uniquement là pour
-que la structure soit valide :
+Deux sons, deux statuts différents.
 
-```
-src/main/resources/assets/illuminaticraft/sounds/illuminati_theme.ogg
-src/main/resources/assets/illuminaticraft/sounds/illuminati_confirmed.ogg
-```
+### `illuminati_confirmed.ogg` — distribué avec le mod ✅
 
-Remplace-les par tes propres fichiers, **en gardant exactement ces noms** :
+*Also sprach Zarathustra* (Strauss, 1896 — domaine public), dans l'interprétation dirigée
+par **Philip Milman**, publiée sous **CC BY 4.0**. Cette licence autorise explicitement la
+redistribution, y compris dans un projet publié, à condition de créditer. L'attribution
+complète est dans [CREDITS.md](CREDITS.md), embarqué dans le `.jar`.
 
-- `illuminati_theme.ogg` → joué au drop de l'item (ton thème X-Files)
-- `illuminati_confirmed.ogg` → joué sur l'auto-invocation (*Also sprach Zarathustra*)
+### `illuminati_theme.ogg` — placeholder silencieux ⚠️
 
-Contraintes techniques :
+Le thème de *X-Files* (Mark Snow, 1993) est protégé et **il n'en existe aucune version
+sous licence libre**. Le dépôt et le `.jar` ne contiennent donc qu'un silence de 3 s
+pour ce slot. Deux façons de le remplir :
+
+- **usage privé** : passer par le resource pack séparé (`IlluminatiCraft-Soundpack`),
+  qui écrase les assets du mod sans jamais entrer dans le dépôt ;
+- **publication** : utiliser un morceau d'ambiance mystère/conspiration sous **CC0 ou
+  CC BY 4.0** (Musopen, filmmusic.io, incompetech), et l'ajouter à `CREDITS.md`.
+
+> Attention au vocabulaire : « royalty-free » ne veut pas dire « domaine public ». Beaucoup
+> de licences royalty-free interdisent la redistribution du fichier audio tel quel — ce qui
+> est exactement ce que fait un mod ou un resource pack. Seules **CC0** et **CC BY**
+> l'autorisent sans ambiguïté.
+
+### Contraintes techniques
 
 - format **OGG Vorbis** obligatoire (Minecraft ne lit ni le MP3 ni le WAV) ;
-- **mono** fortement recommandé — un fichier stéréo n'est pas spatialisé par Minecraft ;
-- conversion : `ffmpeg -i source.mp3 -ac 1 -c:a libvorbis -q:a 5 illuminati_theme.ogg`.
-
-> ⚠️ **Droits d'auteur.** Le thème de *X-Files* (Mark Snow) est une œuvre protégée. La
-> composition d'*Also sprach Zarathustra* (Strauss, 1896) est dans le domaine public,
-> mais **pas les enregistrements** modernes qui en sont faits. Pour un usage privé entre
-> potes, ça ne pose pas de problème pratique. En revanche, si tu publies le `.jar` sur
-> GitHub, Modrinth ou CurseForge, les fichiers audio partent avec — c'est un motif
-> classique de takedown. Deux options propres : garder les `.ogg` silencieux dans le
-> dépôt public et distribuer un pack de sons à part, ou utiliser un enregistrement
-> libre de droits (les versions domaine public de Zarathustra existent sur
-> Musopen / archive.org).
+- **mono obligatoire** — Minecraft ne spatialise pas le stéréo ;
+- durées : ~10–20 s pour le thème au drop (il se déclenche souvent), jusqu'à ~2 min pour
+  le son du succès (événement rare) ;
+- conversion :
+  ```bash
+  ffmpeg -i source.mp3 -ac 1 -ar 44100 -c:a libvorbis -q:a 5 illuminati_confirmed.ogg
+  ```
 
 ---
 
@@ -136,5 +143,7 @@ Voir [SETUP.md](SETUP.md) pour l'installation de l'environnement de dev.
 
 - Concept original : **Illuminati Pet** du mod *Inventory Pets* (Purplicious_Cow).
 - Implémentation Fabric : Remilulz_91.
-- Licence : MIT (le code ; les éventuels fichiers audio que tu ajoutes restent soumis à
-  leurs propres droits).
+- Musique : *Also sprach Zarathustra* dirigée par [Philip Milman](https://pmmusic.pro/),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) —
+  [source](https://www.youtube.com/watch?v=9K3GQdD30F0).
+- Licence du code : MIT. Détail complet des attributions dans [CREDITS.md](CREDITS.md).
