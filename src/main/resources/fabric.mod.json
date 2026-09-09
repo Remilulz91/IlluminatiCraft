@@ -5,9 +5,15 @@
   "name": "IlluminatiCraft",
   "description": "The Illuminati Pet from Inventory Pets, rebuilt for Fabric. Right-click to receive a random craftable item from vanilla AND from every mod installed. Get an Illuminati from an Illuminati to unlock a very special achievement. 2 minute cooldown between uses.",
   "authors": [
-    "Remilulz_91"
+    {
+      "name": "Remilulz_91",
+      "contact": {
+        "homepage": "https://github.com/Remilulz91"
+      }
+    }
   ],
   "contact": {
+    "homepage": "https://github.com/Remilulz91/IlluminatiCraft",
     "sources": "https://github.com/Remilulz91/IlluminatiCraft",
     "issues": "https://github.com/Remilulz91/IlluminatiCraft/issues"
   },

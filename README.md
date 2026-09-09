@@ -141,8 +141,8 @@ Voir [SETUP.md](SETUP.md) pour l'installation de l'environnement de dev.
 
 ## Crédits
 
+- Créateur et mainteneur : **Remilulz_91** — [@Remilulz91](https://github.com/Remilulz91)
 - Concept original : **Illuminati Pet** du mod *Inventory Pets* (Purplicious_Cow).
-- Implémentation Fabric : Remilulz_91.
 - Musique : *Also sprach Zarathustra* dirigée par [Philip Milman](https://pmmusic.pro/),
   [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) —
   [source](https://www.youtube.com/watch?v=9K3GQdD30F0).

@@ -2,7 +2,8 @@
 
 ## Code
 
-IlluminatiCraft — Remilulz_91. Licence MIT (voir `LICENSE`).
+IlluminatiCraft — créé et maintenu par **Remilulz_91**
+([@Remilulz91](https://github.com/Remilulz91)). Licence MIT (voir `LICENSE`).
 
 Concept original : l'**Illuminati Pet** du mod *Inventory Pets* (Purplicious_Cow).
 IlluminatiCraft est une réimplémentation indépendante pour Fabric, sans code repris.
