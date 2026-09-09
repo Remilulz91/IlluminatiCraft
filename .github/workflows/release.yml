@@ -2,7 +2,6 @@ name: Release
 
 # Se declenche quand tu pousses un tag commencant par "v" (ex : v0.1.0)
 #   git tag v0.1.0 && git push origin v0.1.0
-# La release GitHub contient le .jar public + le .jar debug.
 on:
   push:
     tags:
@@ -24,19 +23,17 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
+          cache: gradle
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
-
-      - name: Download gradle-wrapper.jar if missing
+      - name: Prepare Gradle wrapper
         run: |
+          chmod +x ./gradlew
           if [ ! -f gradle/wrapper/gradle-wrapper.jar ]; then
-            echo "Downloading gradle-wrapper.jar..."
-            curl -sSL -o gradle/wrapper/gradle-wrapper.jar https://raw.githubusercontent.com/gradle/gradle/v8.10.0/gradle/wrapper/gradle-wrapper.jar
+            curl -sSL --fail -o gradle/wrapper/gradle-wrapper.jar \
+              https://raw.githubusercontent.com/gradle/gradle/v8.10.0/gradle/wrapper/gradle-wrapper.jar
           fi
+          unzip -t gradle/wrapper/gradle-wrapper.jar > /dev/null || { echo "gradle-wrapper.jar invalide"; exit 1; }
+          ./gradlew --version
 
       - name: Build PUBLIC variant
         run: ./gradlew build --stacktrace

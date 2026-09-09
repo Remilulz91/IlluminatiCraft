@@ -114,3 +114,35 @@ Vérifier que `illuminaticraft.mixins.json` est bien listé dans `fabric.mod.jso
 - Il doit s'appeler exactement `illuminati_theme.ogg` / `illuminati_confirmed.ogg`.
 - Le volume du canal **Jukebox/Disques** doit être > 0 dans les options audio (les sons
   du mod utilisent la catégorie `record`).
+
+### CI : `Failed to apply plugin 'fabric-loom'` / `Problems.forNamespace`
+
+Symptôme dans GitHub Actions :
+
+```
+./gradlew: Permission denied
+Welcome to Gradle 9.7.1!
+> Failed to apply plugin 'fabric-loom'.
+   > 'ProblemReporter Problems.forNamespace(String)'
+```
+
+Enchaînement : `gradlew` a été commité sans le bit exécutable (fichier créé sous
+Windows) → l'action `gradle/actions/setup-gradle` ne peut pas l'utiliser et
+retombe sur **sa propre** version de Gradle (9.x) → **Fabric Loom 1.7 n'est pas
+compatible Gradle 9** (la méthode `Problems.forNamespace` a disparu).
+
+Corrigé dans les workflows : `gradle/actions/setup-gradle` a été retiré, le cache
+Gradle passe par `actions/setup-java` (`cache: gradle`), et une étape
+« Prepare Gradle wrapper » fait `chmod +x ./gradlew` + récupère
+`gradle-wrapper.jar` avant toute invocation. Le wrapper impose Gradle 8.10.
+
+Côté dépôt, poser le bit exécutable une bonne fois pour toutes :
+
+```bash
+git update-index --chmod=+x gradlew
+git commit -m "chmod +x gradlew"
+```
+
+Et de préférence commiter `gradle/wrapper/gradle-wrapper.jar` (IntelliJ le génère
+à l'import, ou `gradle wrapper --gradle-version 8.10`) pour ne pas dépendre d'un
+téléchargement à chaque run.
