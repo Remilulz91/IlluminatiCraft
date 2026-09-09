@@ -3,6 +3,8 @@ package fr.illuminaticraft.events;
 import fr.illuminaticraft.IlluminatiCraft;
 import fr.illuminaticraft.config.IlluminatiCraftConfig;
 import fr.illuminaticraft.items.ModItems;
+import fr.illuminaticraft.persistence.CooldownStore;
+import fr.illuminaticraft.util.ActionBarMessenger;
 import fr.illuminaticraft.util.SoundUtil;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -56,6 +58,7 @@ public class CooldownWatcher {
 
                 if (!player.getItemCooldownManager().isCoolingDown(ModItems.ILLUMINATI_PET)) {
                     it.remove();
+                    CooldownStore.clear(uuid.toString());
                     notifyReady(player);
                 }
             }
@@ -68,9 +71,8 @@ public class CooldownWatcher {
         if (!IlluminatiCraftConfig.get().notifyWhenReady) {
             return;
         }
-        player.sendMessage(
-                Text.translatable("illuminaticraft.pet.ready").formatted(Formatting.GOLD),
-                true);
+        ActionBarMessenger.send(player,
+                Text.translatable("illuminaticraft.pet.ready").formatted(Formatting.GOLD));
         SoundUtil.playVanillaTo(player, "block.note_block.bell", 0.5f, 1.4f);
     }
 }

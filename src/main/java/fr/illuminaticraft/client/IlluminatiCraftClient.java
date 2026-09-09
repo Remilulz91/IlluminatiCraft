@@ -5,13 +5,15 @@ import net.fabricmc.api.ClientModInitializer;
 
 /**
  * Point d'entrée du mod côté client.
- * Rien de lourd ici : le mod est essentiellement server-side, le client ne sert
- * qu'à afficher l'item, jouer les sons et proposer l'écran de config.
+ * Le mod est essentiellement server-side ; le client affiche l'item, joue les sons,
+ * propose l'écran de config et gère le refus pendant le cooldown (que le serveur ne
+ * voit jamais — voir ClientCooldownFeedback).
  */
 public class IlluminatiCraftClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        ClientCooldownFeedback.register();
         IlluminatiCraft.LOGGER.info("[IlluminatiCraft] Client initialisé");
     }
 }

@@ -3,10 +3,13 @@ package fr.illuminaticraft.items;
 import fr.illuminaticraft.IlluminatiCraft;
 import fr.illuminaticraft.config.IlluminatiCraftConfig;
 import fr.illuminaticraft.events.CooldownWatcher;
+import fr.illuminaticraft.persistence.CooldownStore;
 import fr.illuminaticraft.sounds.ModSounds;
+import fr.illuminaticraft.util.ActionBarMessenger;
 import fr.illuminaticraft.util.AdvancementUtil;
 import fr.illuminaticraft.util.RandomItemPicker;
 import fr.illuminaticraft.util.SoundUtil;
+import fr.illuminaticraft.util.TimeFormat;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -68,13 +71,15 @@ public class IlluminatiPetItem extends Item {
             return TypedActionResult.pass(stack);
         }
 
+        // Filet de sécurité : vanilla filtre déjà le clic côté client, donc ce bloc
+        // n'est atteint que par un client modifié. Le vrai retour est dans
+        // ClientCooldownFeedback.
         if (onCooldown) {
             float progress = player.getItemCooldownManager().getCooldownProgress(this, 0.0f);
             int remaining = Math.max(1, Math.round(progress * cfg.cooldownTicks() / 20.0f));
-            player.sendMessage(
-                    Text.translatable("illuminaticraft.pet.cooldown", remaining).formatted(Formatting.GRAY),
-                    true);
-            SoundUtil.playVanillaTo(player, "block.dispenser.fail", 0.4f, 1.2f);
+            ActionBarMessenger.send(player,
+                    Text.translatable("illuminaticraft.pet.cooldown", TimeFormat.minutesSeconds(remaining))
+                            .formatted(Formatting.GRAY));
             return TypedActionResult.fail(stack);
         }
 
@@ -106,6 +111,7 @@ public class IlluminatiPetItem extends Item {
         // === Cooldown appliqué après un tirage réussi ===
         if (!cfg.debugNoCooldown) {
             player.getItemCooldownManager().set(this, cfg.cooldownTicks());
+            CooldownStore.set(player, cfg.cooldownTicks());
             CooldownWatcher.watch(player);
         }
 
@@ -137,7 +143,7 @@ public class IlluminatiPetItem extends Item {
             Text drawMessage = rewardCount > 1
                     ? Text.translatable("illuminaticraft.pet.drawn.multi", rewardName, rewardCount)
                     : Text.translatable("illuminaticraft.pet.drawn", rewardName);
-            player.sendMessage(drawMessage.copy().formatted(Formatting.LIGHT_PURPLE), true);
+            ActionBarMessenger.send(player, drawMessage.copy().formatted(Formatting.LIGHT_PURPLE));
 
             // Le thème du mod accompagne chaque tirage, comme dans Inventory Pets.
             if (cfg.themeSoundGlobal) {

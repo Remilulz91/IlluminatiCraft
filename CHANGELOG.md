@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.4.0
+
+### Fixed
+
+- **The cooldown survived neither a relogin nor a world reload.** Minecraft's
+  `ItemCooldownManager` lives in memory on the player entity and is discarded on
+  disconnect, so leaving and rejoining reset it — the pet could be spammed at will. The
+  expiry is now stored per player in `illuminaticraft-cooldowns.json` inside the world
+  folder, as a world tick, and re-applied on join. World time only advances while the
+  world is running, so pausing a singleplayer game does not burn the cooldown either.
+- **No feedback at all when clicking during the cooldown.** Minecraft filters the use of
+  an item on cooldown client-side, before anything reaches the server, so the server-side
+  message and sound added in 0.3.0 could never fire. The refusal is now handled on the
+  client, where the click actually happens.
+
+### Changed
+
+- The item is now simply named **Illuminati** instead of "Illuminati Pet". The registry
+  id is unchanged, so existing worlds and items keep working.
+- Action bar messages stay up for **5 seconds** instead of vanilla's 3, by re-sending
+  them before they fade.
+- The remaining cooldown is displayed as **minutes and seconds** (`1:35`) rather than a
+  raw number of seconds.
+
 ## 0.3.0
 
 ### Added

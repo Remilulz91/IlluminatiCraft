@@ -1,21 +1,17 @@
 {
   "_comment": "IlluminatiCraft — Traductions françaises",
-
-  "item.illuminaticraft.illuminati_pet": "Illuminati Pet",
-
+  "item.illuminaticraft.illuminati_pet": "Illuminati",
   "illuminaticraft.pet.tooltip.line1": "Clic droit : un item craftable au hasard (vanilla + mods)",
   "illuminaticraft.pet.tooltip.line2": "Cooldown : %s secondes",
-
   "illuminaticraft.pet.drawn": "▲ %s Confirmed!!!",
   "illuminaticraft.pet.drawn.multi": "▲ %s x%s Confirmed!!!",
   "illuminaticraft.pet.drawn.broadcast": "▲ %s a reçu %s x%s de l'Illuminati",
-  "illuminaticraft.pet.cooldown": "▲ L'Illuminati se recharge... %s s",
+  "illuminaticraft.pet.cooldown": "▲ L'Illuminati se recharge... %s",
   "illuminaticraft.pet.ready": "▲ L'Illuminati est prêt",
   "illuminaticraft.pet.no_recipes": "▲ Aucune recette disponible pour le tirage",
   "illuminaticraft.pet.confirmed": "★ ILLUMINATI CONFIRMED ★",
   "illuminaticraft.pet.confirmed.broadcast": "★ %s a obtenu un Illuminati depuis un Illuminati. ILLUMINATI CONFIRMED ★",
-
-  "illuminaticraft.command.given": "✦ %s Illuminati Pet distribué(s)",
+  "illuminaticraft.command.given": "✦ %s Illuminati distribué(s)",
   "illuminaticraft.command.info.header": "=== IlluminatiCraft ===",
   "illuminaticraft.command.info.cache": "Items piochables en cache : %s",
   "illuminaticraft.command.info.cooldown": "Cooldown : %s s",
@@ -24,21 +20,17 @@
   "illuminaticraft.command.info.chest_loot": "Loot en coffre : %s (%s %%)",
   "illuminaticraft.command.reloaded": "✔ Config rechargée — %s items piochables",
   "illuminaticraft.command.cooldown_reset": "✔ Cooldown réinitialisé pour %s joueur(s)",
-
   "subtitles.illuminaticraft.illuminati_theme": "Musique inquiétante",
   "subtitles.illuminaticraft.illuminati_confirmed": "Illuminati confirmed",
-
   "advancements.illuminaticraft.root.title": "Illuminati",
-  "advancements.illuminaticraft.root.description": "Obtiens un Illuminati Pet",
+  "advancements.illuminaticraft.root.description": "Obtiens un Illuminati",
   "advancements.illuminaticraft.confirmed.title": "Illuminati Confirmed",
   "advancements.illuminaticraft.confirmed.description": "Obtiens un Illuminati depuis un Illuminati",
-
   "config.illuminaticraft.title": "Configuration d'IlluminatiCraft",
   "config.illuminaticraft.category.ability": "Ability",
   "config.illuminaticraft.category.sounds": "Sons",
   "config.illuminaticraft.category.obtaining": "Obtention",
   "config.illuminaticraft.restart_required": "Nécessite un redémarrage du jeu",
-
   "config.illuminaticraft.cooldownSeconds": "Cooldown (secondes)",
   "config.illuminaticraft.cooldownSeconds.tooltip": "Délai entre deux utilisations. Inventory Pets : 120 s.",
   "config.illuminaticraft.craftingRecipesOnly": "Recettes de craft uniquement",
