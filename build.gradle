@@ -1,6 +1,7 @@
 plugins {
     id 'fabric-loom' version '1.7-SNAPSHOT'
     id 'maven-publish'
+    id 'me.modmuss50.mod-publish-plugin' version '0.7.4'
 }
 
 group = project.maven_group
@@ -86,6 +87,58 @@ jar {
     // CC BY 4.0 requires the attribution to travel with the redistributed file,
     // so CREDITS.md is bundled inside the JAR.
     from("CREDITS.md")
+}
+
+// Extracts only the current version's section from CHANGELOG.md, so the Modrinth
+// release notes describe this version instead of repeating the whole file.
+def versionChangelog = providers.provider {
+    File file = rootProject.file("CHANGELOG.md")
+    if (!file.exists()) {
+        return "No changelog provided."
+    }
+    List<String> section = []
+    boolean capturing = false
+    for (String line : file.readLines()) {
+        if (line.startsWith("## ")) {
+            if (capturing) break
+            if (line.contains(project.mod_version)) {
+                capturing = true
+            }
+            continue
+        }
+        if (capturing) {
+            section << line
+        }
+    }
+    String text = section.join("\n").trim()
+    text.isEmpty() ? file.text : text
+}
+
+// Modrinth publishing — run with: ./gradlew publishMods
+// Requires the MODRINTH_TOKEN environment variable.
+publishMods {
+    file = remapJar.archiveFile
+    displayName = "IlluminatiCraft ${project.mod_version}"
+    version = project.mod_version
+    changelog = versionChangelog
+    type = STABLE
+    modLoaders.add("fabric")
+
+    modrinth {
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        // The slug works here; swap in the 8-character project ID if the slug ever changes.
+        projectId = "illuminaticraft"
+        minecraftVersions.add(project.minecraft_version)
+        requires {
+            slug = "fabric-api"
+        }
+        optional {
+            slug = "cloth-config"
+        }
+        optional {
+            slug = "modmenu"
+        }
+    }
 }
 
 // configure the maven publication

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.3
+
+### Changed
+
+- The in-game "Website" button now points to the Modrinth page instead of the GitHub
+  repository. Source and issue links are unchanged.
+- Automated Modrinth publishing: tagging a release also uploads the JAR to Modrinth,
+  using only that version's section of the changelog as release notes.
+
 ## 0.1.2
 
 ### Fixed

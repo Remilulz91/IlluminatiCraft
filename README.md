@@ -116,8 +116,8 @@ Two ways to fill it:
 ## Building
 
 ```bash
-./gradlew build                       # PUBLIC build -> build/libs/illuminaticraft-0.1.2.jar
-./gradlew build -PbuildType=debug     # DEBUG build  -> build/libs/illuminaticraft-0.1.2-debug.jar
+./gradlew build                       # PUBLIC build -> build/libs/illuminaticraft-0.1.3.jar
+./gradlew build -PbuildType=debug     # DEBUG build  -> build/libs/illuminaticraft-0.1.3-debug.jar
 ```
 
 The DEBUG build disables the cooldown and turns the debug flags on — handy for testing the
@@ -136,7 +136,11 @@ See [SETUP.md](SETUP.md) for the development environment.
 - `.github/workflows/build.yml` — builds on every push to `main`/`develop`; both JARs are
   uploaded as artifacts (14 day retention).
 - `.github/workflows/release.yml` — on a `v*` tag, creates a **GitHub Release** with the
-  public JAR attached and `CHANGELOG.md` as the body.
+  public JAR attached, then publishes the same JAR to **Modrinth**. The Modrinth step is
+  skipped unless the `MODRINTH_TOKEN` repository secret is set, and it uses only the
+  matching section of `CHANGELOG.md` as release notes.
+
+Available on Modrinth: https://modrinth.com/mod/illuminaticraft
 
 ---
 

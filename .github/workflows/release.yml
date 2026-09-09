@@ -1,8 +1,9 @@
 name: Release
 
-# Triggered by pushing a tag starting with "v" (e.g. v0.1.0):
-#   git tag v0.1.0 && git push origin v0.1.0
+# Triggered by pushing a tag starting with "v" (e.g. v0.1.2):
+#   git tag v0.1.2 && git push origin v0.1.2
 #
+# Creates the GitHub Release, then publishes to Modrinth.
 # The release ships the PUBLIC jar only. The debug jar is intentionally left out of
 # public downloads; it stays available as a Build workflow artifact (Actions tab) or
 # by building locally with: ./gradlew build -PbuildType=debug
@@ -17,6 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      # Empty when the secret is not configured; the Modrinth step is skipped then.
+      MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
 
     steps:
       - name: Checkout
@@ -64,3 +68,9 @@ jobs:
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Runs last so a Modrinth hiccup never costs the GitHub release.
+      # Skipped entirely when the MODRINTH_TOKEN secret is not set.
+      - name: Publish to Modrinth
+        if: env.MODRINTH_TOKEN != ''
+        run: ./gradlew publishMods --stacktrace
