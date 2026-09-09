@@ -130,7 +130,12 @@ publishMods {
     if (project.findProperty("modrinth_project_id")?.trim()) {
         logger.lifecycle("==> Modrinth publishing enabled for project ${project.modrinth_project_id.trim()}")
         modrinth {
+            // Environment variable first, Gradle property as a fallback.
+            // A long-lived Gradle daemon can keep the environment it was started
+            // with, so MODRINTH_TOKEN set after the daemon started may not be seen.
+            // In that case: ./gradlew publishMods -PmodrinthToken=mrp_xxx
             accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+                    .orElse(providers.gradleProperty("modrinthToken"))
             projectId = project.modrinth_project_id.trim()
             minecraftVersions.add(project.minecraft_version)
             requires {
