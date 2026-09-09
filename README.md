@@ -116,8 +116,8 @@ Two ways to fill it:
 ## Building
 
 ```bash
-./gradlew build                       # PUBLIC build -> build/libs/illuminaticraft-0.1.1.jar
-./gradlew build -PbuildType=debug     # DEBUG build  -> build/libs/illuminaticraft-0.1.1-debug.jar
+./gradlew build                       # PUBLIC build -> build/libs/illuminaticraft-0.1.2.jar
+./gradlew build -PbuildType=debug     # DEBUG build  -> build/libs/illuminaticraft-0.1.2-debug.jar
 ```
 
 The DEBUG build disables the cooldown and turns the debug flags on — handy for testing the

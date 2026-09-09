@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.2
+
+### Fixed
+
+- The mod declared `"minecraft": "~1.21.1"`, which Fabric reads as *any 1.21.x from
+  1.21.1 onwards*. It would therefore load on 1.21.2 through 1.21.11 and crash: several
+  APIs it relies on changed in 1.21.2 (`ItemCooldownManager` now takes an `ItemStack`,
+  `TypedActionResult` was renamed, loot conditions and recipe JSON changed shape). The
+  dependency is now pinned to **1.21.1 exactly**, so Fabric Loader refuses to start it on
+  an unsupported version instead of failing at runtime.
+
 ## 0.1.1
 
 ### Fixed
