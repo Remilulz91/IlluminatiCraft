@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.2.0
+
+### Changed
+
+- **The theme now plays on the draw, not on the drop.** `illuminati_theme` fires on every
+  successful right-click, the way the original Inventory Pets item behaves. Dropping the
+  pet no longer plays anything.
+- The short vanilla beacon chime that used to accompany a draw is gone — the theme
+  replaces it.
+- Config: `dropSoundGlobal` is renamed **`themeSoundGlobal`** and now controls whether the
+  draw theme is heard by the whole server or only by the player using the pet. Existing
+  config files fall back to the default (off) for the new key.
+
+### Removed
+
+- The `PlayerEntity.dropItem` mixin, which only existed to play the drop sound. The mod no
+  longer ships any mixin, which removes its most version-fragile piece.
+
 ## 0.1.3
 
 ### Changed

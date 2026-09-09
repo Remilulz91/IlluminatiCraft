@@ -73,8 +73,8 @@ public class IlluminatiCraftConfig {
     /** Jouer les sons custom du mod (thème au drop, musique "confirmed"). */
     public boolean enableCustomSounds = true;
 
-    /** Le son joué au drop est-il entendu par tout le serveur (true) ou seulement autour (false) ? */
-    public boolean dropSoundGlobal = false;
+    /** Le thème joué au tirage est-il entendu par tout le serveur (true) ou seulement par le joueur (false) ? */
+    public boolean themeSoundGlobal = false;
 
     /** Volume des sons custom. */
     public float soundVolume = 1.0f;

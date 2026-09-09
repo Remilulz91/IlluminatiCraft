@@ -18,7 +18,7 @@ import net.minecraft.util.Identifier;
  */
 public class ModSounds {
 
-    /** Joué quand un joueur drop un Illuminati Pet. */
+    /** Joué à chaque tirage réussi (clic droit hors cooldown). */
     public static final SoundEvent ILLUMINATI_THEME = of("illuminati_theme");
 
     /** Joué quand un Illuminati Pet se donne lui-même (succès "Illuminati Confirmed"). */

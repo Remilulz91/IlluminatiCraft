@@ -31,9 +31,6 @@
       "fr.illuminaticraft.client.config.ModMenuIntegration"
     ]
   },
-  "mixins": [
-    "illuminaticraft.mixins.json"
-  ],
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric-api": "*",

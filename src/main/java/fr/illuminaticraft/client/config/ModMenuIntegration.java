@@ -67,10 +67,10 @@ public class ModMenuIntegration implements ModMenuApi {
                     .setSaveConsumer(v -> cfg.enableCustomSounds = v).build());
 
             sounds.addEntry(entry.startBooleanToggle(
-                            Text.translatable("config.illuminaticraft.dropSoundGlobal"), cfg.dropSoundGlobal)
+                            Text.translatable("config.illuminaticraft.themeSoundGlobal"), cfg.themeSoundGlobal)
                     .setDefaultValue(false)
-                    .setTooltip(Text.translatable("config.illuminaticraft.dropSoundGlobal.tooltip"))
-                    .setSaveConsumer(v -> cfg.dropSoundGlobal = v).build());
+                    .setTooltip(Text.translatable("config.illuminaticraft.themeSoundGlobal.tooltip"))
+                    .setSaveConsumer(v -> cfg.themeSoundGlobal = v).build());
 
             sounds.addEntry(entry.startFloatField(
                             Text.translatable("config.illuminaticraft.soundVolume"), cfg.soundVolume)

@@ -13,11 +13,9 @@ you have installed. And if the Illuminati gives you an Illuminati…
 
 | Action | Effect |
 |---|---|
-| **Right-click** | Gives a random item drawn from every loaded crafting recipe (vanilla + modded). **2 minute** cooldown. |
+| **Right-click** | Gives a random item drawn from every loaded crafting recipe (vanilla + modded), and plays the `illuminati_theme` sound. **2 minute** cooldown. |
 | **Illuminati from an Illuminati** | Unlocks the **Illuminati Confirmed** achievement (+100 XP), announces it server-wide, spawns totem particles and plays the `illuminati_confirmed` sound. |
-| **Dropping the item (Q key)** | Plays the `illuminati_theme` sound — **silent by default**, see the Sounds section. |
 
-Each successful draw also plays a short vanilla beacon chime as feedback; that one is not the mod's theme.
 
 The item is **fireproof**, does not stack, and is *Epic* rarity.
 
@@ -68,7 +66,7 @@ Cloth Config**.
 | `broadcastDraws` | `false` | Announce every draw to the whole server. |
 | `blacklistedItems` / `blacklistedNamespaces` | see file | Items/namespaces excluded from the draw (command blocks, barrier… by default). |
 | `enableCustomSounds` | `true` | Enable the mod's sounds. |
-| `dropSoundGlobal` | `false` | `true` makes the drop theme audible server-wide. |
+| `themeSoundGlobal` | `false` | `true` makes the draw theme audible to the whole server. |
 | `soundVolume` | `1.0` | Custom sound volume. |
 | `addToCreativeTab` | `true` | Add the item to the creative menu (requires a restart). |
 | `enableChestLoot` | `true` | Inject the item into chest loot tables. |
@@ -89,9 +87,9 @@ attribution lives in [CREDITS.md](CREDITS.md), which is bundled inside the JAR.
 
 ### `illuminati_theme.ogg` — silent placeholder
 
-The X-Files theme (Mark Snow, 1993) is copyrighted and **no freely licensed version of it
-exists**. The repository and the JAR therefore ship a 3-second silence for this slot.
-Two ways to fill it:
+Played on every successful draw. The X-Files theme (Mark Snow, 1993) is copyrighted and
+**no freely licensed version of it exists**. The repository and the JAR therefore ship a
+3-second silence for this slot, so draws are currently silent. Two ways to fill it:
 
 - **private use**: use the separate resource pack, which overrides the mod's assets
   without ever entering the repository;
@@ -106,8 +104,8 @@ Two ways to fill it:
 
 - **OGG Vorbis** only (Minecraft reads neither MP3 nor WAV);
 - **mono required** — Minecraft does not spatialize stereo files;
-- length: ~10–20 s for the drop theme (it triggers often), up to ~2 min for the
-  achievement sound (rare event);
+- length: **~5 s** for the draw theme — it fires on every use, and that is the length of
+  the original Inventory Pets clip; up to ~2 min for the achievement sound (rare event);
 - conversion:
   ```bash
   ffmpeg -i source.mp3 -ac 1 -ar 44100 -c:a libvorbis -q:a 5 illuminati_confirmed.ogg

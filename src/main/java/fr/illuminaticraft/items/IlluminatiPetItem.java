@@ -127,7 +127,12 @@ public class IlluminatiPetItem extends Item {
                             .formatted(Formatting.LIGHT_PURPLE),
                     true);
 
-            SoundUtil.playVanillaTo(player, "block.beacon.activate", 0.4f, 1.8f);
+            // Le thème du mod accompagne chaque tirage, comme dans Inventory Pets.
+            if (cfg.themeSoundGlobal) {
+                SoundUtil.playToAll(server, ModSounds.ILLUMINATI_THEME);
+            } else {
+                SoundUtil.playTo(player, ModSounds.ILLUMINATI_THEME);
+            }
 
             serverWorld.spawnParticles(ParticleTypes.ENCHANT,
                     player.getX(), player.getY() + 1.2, player.getZ(),
