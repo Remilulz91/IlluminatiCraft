@@ -15,7 +15,9 @@ you have installed. And if the Illuminati gives you an Illuminati…
 |---|---|
 | **Right-click** | Gives a random item drawn from every loaded crafting recipe (vanilla + modded). **2 minute** cooldown. |
 | **Illuminati from an Illuminati** | Unlocks the **Illuminati Confirmed** achievement (+100 XP), announces it server-wide, spawns totem particles and plays the `illuminati_confirmed` sound. |
-| **Dropping the item (Q key)** | Plays the `illuminati_theme` sound. |
+| **Dropping the item (Q key)** | Plays the `illuminati_theme` sound — **silent by default**, see the Sounds section. |
+
+Each successful draw also plays a short vanilla beacon chime as feedback; that one is not the mod's theme.
 
 The item is **fireproof**, does not stack, and is *Epic* rarity.
 
@@ -116,18 +118,11 @@ Two ways to fill it:
 ## Building
 
 ```bash
-./gradlew build                       # PUBLIC build -> build/libs/illuminaticraft-0.1.3.jar
-./gradlew build -PbuildType=debug     # DEBUG build  -> build/libs/illuminaticraft-0.1.3-debug.jar
+./gradlew build
 ```
 
-The DEBUG build disables the cooldown and turns the debug flags on — handy for testing the
-*Illuminati Confirmed* achievement without waiting two minutes between attempts. It is
-**not** attached to releases; grab it from the Actions tab artifacts or build it locally.
-
-Drop the JAR into the `mods/` folder of a **Fabric 1.21.1** instance with **Fabric API**.
-Cloth Config and Mod Menu are optional (config screen only).
-
-See [SETUP.md](SETUP.md) for the development environment.
+The JAR lands in `build/libs/`. Drop it into the `mods/` folder of a **Fabric 1.21.1**
+instance with **Fabric API**. Cloth Config and Mod Menu are optional (config screen only).
 
 ---
 
