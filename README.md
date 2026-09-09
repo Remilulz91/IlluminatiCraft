@@ -13,7 +13,9 @@ you have installed. And if the Illuminati gives you an Illuminati…
 
 | Action | Effect |
 |---|---|
-| **Right-click** | Gives a random item drawn from every loaded crafting recipe (vanilla + modded), and plays the `illuminati_theme` sound. **2 minute** cooldown. |
+| **Right-click** | Gives a random item drawn from every loaded crafting recipe (vanilla + modded), announces it above the hotbar as `<item> Confirmed!!!`, and plays the `illuminati_theme` sound. **2 minute** cooldown. |
+| **Right-click while recharging** | Shows the remaining seconds above the hotbar with a short refusal sound. The hand does not swing. |
+| **Cooldown reaching zero** | Announces that the pet is ready again, above the hotbar. |
 | **Illuminati from an Illuminati** | Unlocks the **Illuminati Confirmed** achievement (+100 XP), announces it server-wide, spawns totem particles and plays the `illuminati_confirmed` sound. |
 
 
@@ -64,6 +66,7 @@ Cloth Config**.
 | `giveFullRecipeOutput` | `true` | Give the full recipe output (e.g. 4 planks) instead of a single item. |
 | `selfDrawBoostPercent` | `1.0` | Forced chance (%) of drawing the Illuminati itself. **`0.0` = fully random**, faithful to Inventory Pets — but the achievement becomes nearly unreachable (~1 in 1500 in pure vanilla). |
 | `broadcastDraws` | `false` | Announce every draw to the whole server. |
+| `notifyWhenReady` | `true` | Announce above the hotbar when the cooldown ends. |
 | `blacklistedItems` / `blacklistedNamespaces` | see file | Items/namespaces excluded from the draw (command blocks, barrier… by default). |
 | `enableCustomSounds` | `true` | Enable the mod's sounds. |
 | `themeSoundGlobal` | `false` | `true` makes the draw theme audible to the whole server. |

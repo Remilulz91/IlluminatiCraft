@@ -53,6 +53,9 @@ public class IlluminatiCraftConfig {
     /** L'item pioché est-il aussi annoncé aux autres joueurs du serveur ? */
     public boolean broadcastDraws = false;
 
+    /** Prévenir le joueur, dans la barre d'action, quand le cooldown est écoulé. */
+    public boolean notifyWhenReady = true;
+
     /** Namespaces d'items interdits au tirage (ex. "minecraft" pour du 100 % modé). */
     public List<String> blacklistedNamespaces = new ArrayList<>();
 

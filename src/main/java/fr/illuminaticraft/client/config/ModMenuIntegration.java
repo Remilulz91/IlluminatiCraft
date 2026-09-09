@@ -57,6 +57,12 @@ public class ModMenuIntegration implements ModMenuApi {
                     .setDefaultValue(false)
                     .setSaveConsumer(v -> cfg.broadcastDraws = v).build());
 
+            ability.addEntry(entry.startBooleanToggle(
+                            Text.translatable("config.illuminaticraft.notifyWhenReady"), cfg.notifyWhenReady)
+                    .setDefaultValue(true)
+                    .setTooltip(Text.translatable("config.illuminaticraft.notifyWhenReady.tooltip"))
+                    .setSaveConsumer(v -> cfg.notifyWhenReady = v).build());
+
             // === Sons ===
             ConfigCategory sounds = builder.getOrCreateCategory(
                     Text.translatable("config.illuminaticraft.category.sounds"));

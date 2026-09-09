@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.3.0
+
+### Added
+
+- **Ready notification.** When the cooldown expires, a message appears above the hotbar
+  with a short chime, the way Inventory Pets announced the pet was usable again. Watched
+  players are only tracked while a cooldown is running, and checked twice a second.
+  Toggle with `notifyWhenReady`.
+- **Feedback sound when the pet is still recharging**, alongside the existing countdown
+  message.
+
+### Changed
+
+- Draw message now follows the original format: **`<item> Confirmed!!!`**, shown above
+  the hotbar. A separate line is used when the recipe yields more than one item.
+- The cooldown is now checked on the client as well as the server. The hand no longer
+  swings when the pet is refused, instead of swinging and being rejected afterwards.
+
 ## 0.2.0
 
 ### Changed

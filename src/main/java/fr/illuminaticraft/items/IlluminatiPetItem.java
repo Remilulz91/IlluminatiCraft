@@ -2,6 +2,7 @@ package fr.illuminaticraft.items;
 
 import fr.illuminaticraft.IlluminatiCraft;
 import fr.illuminaticraft.config.IlluminatiCraftConfig;
+import fr.illuminaticraft.events.CooldownWatcher;
 import fr.illuminaticraft.sounds.ModSounds;
 import fr.illuminaticraft.util.AdvancementUtil;
 import fr.illuminaticraft.util.RandomItemPicker;
@@ -43,28 +44,37 @@ public class IlluminatiPetItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
+        IlluminatiCraftConfig cfg = IlluminatiCraftConfig.get();
 
-        // Côté client : on laisse jouer l'animation de main, la logique est serveur
+        // === Cooldown ===
+        // Vérifié des deux côtés : le ItemCooldownManager est synchronisé, donc le
+        // client sait aussi qu'il doit refuser — d'où l'absence d'animation de main
+        // pendant la recharge, au lieu d'un swing suivi d'un refus serveur.
+        boolean onCooldown = !cfg.debugNoCooldown
+                && user.getItemCooldownManager().isCoolingDown(this);
+
         if (world.isClient) {
-            return TypedActionResult.success(stack, true);
+            // fail = pas d'animation de main ; success(stack, true) = swing
+            return onCooldown
+                    ? TypedActionResult.fail(stack)
+                    : TypedActionResult.success(stack, true);
         }
         if (!(user instanceof ServerPlayerEntity player)) {
             return TypedActionResult.pass(stack);
         }
 
-        IlluminatiCraftConfig cfg = IlluminatiCraftConfig.get();
         MinecraftServer server = player.getServer();
         if (server == null) {
             return TypedActionResult.pass(stack);
         }
 
-        // === Cooldown ===
-        if (!cfg.debugNoCooldown && player.getItemCooldownManager().isCoolingDown(this)) {
+        if (onCooldown) {
             float progress = player.getItemCooldownManager().getCooldownProgress(this, 0.0f);
             int remaining = Math.max(1, Math.round(progress * cfg.cooldownTicks() / 20.0f));
             player.sendMessage(
                     Text.translatable("illuminaticraft.pet.cooldown", remaining).formatted(Formatting.GRAY),
                     true);
+            SoundUtil.playVanillaTo(player, "block.dispenser.fail", 0.4f, 1.2f);
             return TypedActionResult.fail(stack);
         }
 
@@ -96,6 +106,7 @@ public class IlluminatiPetItem extends Item {
         // === Cooldown appliqué après un tirage réussi ===
         if (!cfg.debugNoCooldown) {
             player.getItemCooldownManager().set(this, cfg.cooldownTicks());
+            CooldownWatcher.watch(player);
         }
 
         ServerWorld serverWorld = player.getServerWorld();
@@ -122,10 +133,11 @@ public class IlluminatiPetItem extends Item {
                             .formatted(Formatting.GOLD),
                     false);
         } else {
-            player.sendMessage(
-                    Text.translatable("illuminaticraft.pet.drawn", rewardName, rewardCount)
-                            .formatted(Formatting.LIGHT_PURPLE),
-                    true);
+            // Format d'Inventory Pets : "<objet> Confirmed!!!", dans la barre d'action
+            Text drawMessage = rewardCount > 1
+                    ? Text.translatable("illuminaticraft.pet.drawn.multi", rewardName, rewardCount)
+                    : Text.translatable("illuminaticraft.pet.drawn", rewardName);
+            player.sendMessage(drawMessage.copy().formatted(Formatting.LIGHT_PURPLE), true);
 
             // Le thème du mod accompagne chaque tirage, comme dans Inventory Pets.
             if (cfg.themeSoundGlobal) {

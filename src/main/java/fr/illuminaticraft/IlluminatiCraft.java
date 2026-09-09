@@ -2,6 +2,7 @@ package fr.illuminaticraft;
 
 import fr.illuminaticraft.commands.IlluminatiCommand;
 import fr.illuminaticraft.config.IlluminatiCraftConfig;
+import fr.illuminaticraft.events.CooldownWatcher;
 import fr.illuminaticraft.items.ModItems;
 import fr.illuminaticraft.loot.ModLootTables;
 import fr.illuminaticraft.sounds.ModSounds;
@@ -73,7 +74,10 @@ public class IlluminatiCraft implements ModInitializer {
         // 5. Injection dans les loot tables de coffres
         ModLootTables.register();
 
-        // 6. Commandes /illuminati
+        // 6. Notification de fin de cooldown
+        CooldownWatcher.register();
+
+        // 7. Commandes /illuminati
         CommandRegistrationCallback.EVENT.register(IlluminatiCommand::register);
         LOGGER.info("[IlluminatiCraft] Commandes enregistrées");
 
