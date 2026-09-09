@@ -3,6 +3,7 @@ package fr.illuminaticraft.items;
 import fr.illuminaticraft.IlluminatiCraft;
 import fr.illuminaticraft.config.IlluminatiCraftConfig;
 import fr.illuminaticraft.events.CooldownWatcher;
+import fr.illuminaticraft.network.ModNetworking;
 import fr.illuminaticraft.persistence.CooldownStore;
 import fr.illuminaticraft.sounds.ModSounds;
 import fr.illuminaticraft.util.ActionBarMessenger;
@@ -36,11 +37,11 @@ import java.util.List;
  * Si le tirage retombe sur un Illuminati Pet, le joueur débloque le succès
  * "Illuminati Confirmed" et la musique associée est jouée.
  */
-public class IlluminatiPetItem extends Item {
+public class IlluminatiItem extends Item {
 
     public static final Identifier CONFIRMED_ADVANCEMENT = IlluminatiCraft.id("illuminati_confirmed");
 
-    public IlluminatiPetItem(Settings settings) {
+    public IlluminatiItem(Settings settings) {
         super(settings);
     }
 
@@ -87,7 +88,7 @@ public class IlluminatiPetItem extends Item {
         ItemStack reward;
         double boost = cfg.selfDrawBoostPercent;
         if (boost > 0.0 && RandomItemPicker.rollPercent() < boost) {
-            reward = new ItemStack(ModItems.ILLUMINATI_PET);
+            reward = new ItemStack(ModItems.ILLUMINATI);
         } else {
             reward = RandomItemPicker.draw(server);
         }
@@ -99,7 +100,7 @@ public class IlluminatiPetItem extends Item {
             return TypedActionResult.fail(stack);
         }
 
-        boolean selfDraw = reward.isOf(ModItems.ILLUMINATI_PET);
+        boolean selfDraw = reward.isOf(ModItems.ILLUMINATI);
         Text rewardName = reward.getName();
         int rewardCount = reward.getCount();
 
@@ -113,6 +114,7 @@ public class IlluminatiPetItem extends Item {
             player.getItemCooldownManager().set(this, cfg.cooldownTicks());
             CooldownStore.set(player, cfg.cooldownTicks());
             CooldownWatcher.watch(player);
+            ModNetworking.sendCooldown(player, cfg.cooldownTicks());
         }
 
         ServerWorld serverWorld = player.getServerWorld();

@@ -56,7 +56,7 @@ public class CooldownWatcher {
                     continue;
                 }
 
-                if (!player.getItemCooldownManager().isCoolingDown(ModItems.ILLUMINATI_PET)) {
+                if (!player.getItemCooldownManager().isCoolingDown(ModItems.ILLUMINATI)) {
                     it.remove();
                     CooldownStore.clear(uuid.toString());
                     notifyReady(player);

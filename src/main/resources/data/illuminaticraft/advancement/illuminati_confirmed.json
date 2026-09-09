@@ -2,7 +2,7 @@
   "parent": "illuminaticraft:root",
   "display": {
     "icon": {
-      "id": "illuminaticraft:illuminati_pet"
+      "id": "illuminaticraft:illuminati"
     },
     "title": {
       "translate": "advancements.illuminaticraft.confirmed.title"

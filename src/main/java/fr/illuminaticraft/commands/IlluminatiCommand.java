@@ -64,7 +64,7 @@ public class IlluminatiCommand {
                             Collection<ServerPlayerEntity> targets, int count) {
         for (ServerPlayerEntity player : targets) {
             for (int i = 0; i < count; i++) {
-                ItemStack stack = new ItemStack(ModItems.ILLUMINATI_PET);
+                ItemStack stack = new ItemStack(ModItems.ILLUMINATI);
                 if (!player.getInventory().insertStack(stack)) {
                     player.dropItem(stack, false);
                 }
@@ -112,7 +112,7 @@ public class IlluminatiCommand {
     private static int resetCooldown(CommandContext<ServerCommandSource> ctx,
                                      Collection<ServerPlayerEntity> targets) {
         for (ServerPlayerEntity player : targets) {
-            player.getItemCooldownManager().remove(ModItems.ILLUMINATI_PET);
+            player.getItemCooldownManager().remove(ModItems.ILLUMINATI);
         }
         ctx.getSource().sendFeedback(
                 () -> Text.translatable("illuminaticraft.command.cooldown_reset",

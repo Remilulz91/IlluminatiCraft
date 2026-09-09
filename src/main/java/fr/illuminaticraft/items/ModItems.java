@@ -14,10 +14,10 @@ import net.minecraft.util.Rarity;
  */
 public class ModItems {
 
-    /** L'Illuminati Pet — clic droit pour un item aléatoire craftable. */
-    public static final Item ILLUMINATI_PET = register(
-            "illuminati_pet",
-            new IlluminatiPetItem(new Item.Settings()
+    /** L'Illuminati — clic droit pour un item aléatoire craftable. */
+    public static final Item ILLUMINATI = register(
+            "illuminati",
+            new IlluminatiItem(new Item.Settings()
                     .maxCount(1)
                     .rarity(Rarity.EPIC)
                     .fireproof())
@@ -32,7 +32,7 @@ public class ModItems {
 
         if (IlluminatiCraftConfig.get().addToCreativeTab) {
             ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS)
-                    .register(entries -> entries.add(ILLUMINATI_PET));
+                    .register(entries -> entries.add(ILLUMINATI));
         }
     }
 }

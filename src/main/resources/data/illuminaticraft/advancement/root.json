@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "id": "illuminaticraft:illuminati_pet"
+      "id": "illuminaticraft:illuminati"
     },
     "title": {
       "translate": "advancements.illuminaticraft.root.title"
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "items": "illuminaticraft:illuminati_pet"
+            "items": "illuminaticraft:illuminati"
           }
         ]
       }

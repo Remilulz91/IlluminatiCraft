@@ -52,7 +52,7 @@ public class ModLootTables {
             tableBuilder.pool(LootPool.builder()
                     .rolls(ConstantLootNumberProvider.create(1.0f))
                     .conditionally(RandomChanceLootCondition.builder(cfg.chestLootChance))
-                    .with(ItemEntry.builder(ModItems.ILLUMINATI_PET)));
+                    .with(ItemEntry.builder(ModItems.ILLUMINATI)));
         });
 
         IlluminatiCraft.LOGGER.info("[ModLootTables] Injection loot enregistrée ({} tables ciblées)", TARGETS.size());

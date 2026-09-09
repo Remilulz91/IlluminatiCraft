@@ -31,6 +31,17 @@ public class ClientCooldownFeedback {
     private static boolean wasUseKeyPressed = false;
     private static int displayTicksLeft = 0;
 
+    /**
+     * Durée réelle du cooldown en cours, annoncée par le serveur.
+     * 0 tant qu'aucun paquet n'est arrivé : on retombe alors sur la config locale.
+     */
+    private static int syncedTotalTicks = 0;
+
+    /** Appelé à la réception de CooldownSyncPayload. */
+    public static void setCooldownTotalTicks(int totalTicks) {
+        syncedTotalTicks = Math.max(0, totalTicks);
+    }
+
     public static void register() {
         ClientTickEvents.END_CLIENT_TICK.register(ClientCooldownFeedback::tick);
     }
@@ -44,9 +55,9 @@ public class ClientCooldownFeedback {
         }
 
         boolean pressed = client.options.useKey.isPressed();
-        boolean holdingPet = player.getMainHandStack().isOf(ModItems.ILLUMINATI_PET)
-                || player.getOffHandStack().isOf(ModItems.ILLUMINATI_PET);
-        boolean cooling = player.getItemCooldownManager().isCoolingDown(ModItems.ILLUMINATI_PET);
+        boolean holdingPet = player.getMainHandStack().isOf(ModItems.ILLUMINATI)
+                || player.getOffHandStack().isOf(ModItems.ILLUMINATI);
+        boolean cooling = player.getItemCooldownManager().isCoolingDown(ModItems.ILLUMINATI);
 
         // Front montant uniquement : un clic maintenu ne rejoue pas le son en boucle
         if (pressed && !wasUseKeyPressed && holdingPet && cooling) {
@@ -60,6 +71,7 @@ public class ClientCooldownFeedback {
         }
         if (!cooling) {
             displayTicksLeft = 0;
+            syncedTotalTicks = 0;
             return;
         }
 
@@ -72,14 +84,17 @@ public class ClientCooldownFeedback {
     }
 
     /**
-     * Le client ne connaît pas la durée configurée sur le serveur : il n'a que la
-     * progression 0–1 du cooldown. On la convertit avec la valeur de SA config, ce
-     * qui est exact en solo et sur un serveur laissé au réglage par défaut.
+     * Le client ne reçoit du ItemCooldownManager qu'une progression de 0 à 1. La
+     * durée réelle vient du serveur via CooldownSyncPayload — c'est indispensable
+     * après une restauration, où le cooldown appliqué est le reliquat et non la
+     * durée pleine. La config locale ne sert que de repli.
      */
     private static String remainingLabel(ClientPlayerEntity player) {
         float progress = player.getItemCooldownManager()
-                .getCooldownProgress(ModItems.ILLUMINATI_PET, 0.0f);
-        int totalTicks = IlluminatiCraftConfig.get().cooldownTicks();
+                .getCooldownProgress(ModItems.ILLUMINATI, 0.0f);
+        int totalTicks = syncedTotalTicks > 0
+                ? syncedTotalTicks
+                : IlluminatiCraftConfig.get().cooldownTicks();
         int seconds = Math.max(1, Math.round(progress * totalTicks / 20.0f));
         return TimeFormat.minutesSeconds(seconds);
     }

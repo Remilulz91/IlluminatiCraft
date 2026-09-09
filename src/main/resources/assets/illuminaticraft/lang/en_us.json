@@ -1,6 +1,6 @@
 {
   "_comment": "IlluminatiCraft — English translations",
-  "item.illuminaticraft.illuminati_pet": "Illuminati",
+  "item.illuminaticraft.illuminati": "Illuminati",
   "illuminaticraft.pet.tooltip.line1": "Right-click: a random craftable item (vanilla + modded)",
   "illuminaticraft.pet.tooltip.line2": "Cooldown: %s seconds",
   "illuminaticraft.pet.drawn": "▲ %s Confirmed!!!",

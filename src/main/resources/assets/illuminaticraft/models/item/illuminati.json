@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "illuminaticraft:item/illuminati_pet"
+    "layer0": "illuminaticraft:item/illuminati"
   }
 }

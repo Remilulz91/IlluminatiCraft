@@ -5,6 +5,7 @@ import fr.illuminaticraft.config.IlluminatiCraftConfig;
 import fr.illuminaticraft.events.CooldownWatcher;
 import fr.illuminaticraft.items.ModItems;
 import fr.illuminaticraft.loot.ModLootTables;
+import fr.illuminaticraft.network.ModNetworking;
 import fr.illuminaticraft.persistence.CooldownStore;
 import fr.illuminaticraft.sounds.ModSounds;
 import fr.illuminaticraft.util.ActionBarMessenger;
@@ -76,12 +77,15 @@ public class IlluminatiCraft implements ModInitializer {
         // 5. Injection dans les loot tables de coffres
         ModLootTables.register();
 
-        // 6. Cooldowns : persistance entre deux sessions + notification de fin
+        // 6. Réseau (durée de cooldown envoyée au client)
+        ModNetworking.register();
+
+        // 7. Cooldowns : persistance entre deux sessions + notification de fin
         CooldownStore.register();
         CooldownWatcher.register();
         ActionBarMessenger.register();
 
-        // 7. Commandes /illuminati
+        // 8. Commandes /illuminati
         CommandRegistrationCallback.EVENT.register(IlluminatiCommand::register);
         LOGGER.info("[IlluminatiCraft] Commandes enregistrées");
 

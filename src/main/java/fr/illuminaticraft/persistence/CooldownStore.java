@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import fr.illuminaticraft.IlluminatiCraft;
 import fr.illuminaticraft.events.CooldownWatcher;
 import fr.illuminaticraft.items.ModItems;
+import fr.illuminaticraft.network.ModNetworking;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.server.MinecraftServer;
@@ -80,8 +81,12 @@ public class CooldownStore {
         }
 
         int ticks = (int) Math.min(remaining, Integer.MAX_VALUE);
-        player.getItemCooldownManager().set(ModItems.ILLUMINATI_PET, ticks);
+        player.getItemCooldownManager().set(ModItems.ILLUMINATI, ticks);
         CooldownWatcher.watch(player);
+
+        // Le cooldown restauré est un reliquat : sans cette annonce, le client
+        // afficherait la durée pleine au lieu du temps réellement restant.
+        ModNetworking.sendCooldown(player, ticks);
 
         IlluminatiCraft.LOGGER.info("[CooldownStore] Cooldown restauré pour {} ({} s)",
                 player.getName().getString(), ticks / 20);

@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.5.0
+
+### Breaking
+
+- **The item's registry id changed from `illuminaticraft:illuminati_pet` to
+  `illuminaticraft:illuminati`.** Items already placed in existing worlds will not
+  survive the update — Minecraft drops entries it can no longer resolve. Retrieve them
+  with `/illuminati give` after updating. Crafting recipe, loot tables, advancement,
+  model and texture were all renamed to match.
+
+### Fixed
+
+- **A restored cooldown displayed the full duration instead of the time actually left.**
+  The cooldown itself was correct; the countdown was not. The client only receives a
+  0–1 progress value from `ItemCooldownManager` and was converting it using the full
+  configured duration, so a restored 40-second cooldown showed as `2:00`. The server now
+  sends the real duration of the cooldown it just applied, and the client uses that.
+- Same root cause, second symptom: on a server whose `cooldownSeconds` differed from the
+  client's own config, the countdown was wrong. It no longer depends on the client
+  config, which is now only a fallback if the packet has not arrived.
+
 ## 0.4.0
 
 ### Fixed
