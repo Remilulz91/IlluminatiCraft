@@ -83,8 +83,8 @@ jar {
     from("LICENSE") {
         rename { "${it}_${project.archives_base_name}" }
     }
-    // CC BY 4.0 : l'attribution doit voyager avec le fichier redistribué,
-    // donc CREDITS.md est embarqué dans le JAR.
+    // CC BY 4.0 requires the attribution to travel with the redistributed file,
+    // so CREDITS.md is bundled inside the JAR.
     from("CREDITS.md")
 }
 

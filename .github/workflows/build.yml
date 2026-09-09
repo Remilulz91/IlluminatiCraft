@@ -1,5 +1,7 @@
 name: Build
 
+# Builds both variants on every push. Both jars are uploaded as workflow artifacts:
+# this is where the debug jar lives, instead of in the public releases.
 on:
   push:
     branches: [main, develop]
@@ -25,19 +27,18 @@ jobs:
           java-version: 21
           cache: gradle
 
-      # Fabric Loom 1.7 n'est PAS compatible Gradle 9.
-      # On force donc l'usage du wrapper (Gradle 8.10, cf. gradle-wrapper.properties)
-      # et on n'utilise pas gradle/actions/setup-gradle, qui retombe sur sa propre
-      # version de Gradle (9.x) des que ./gradlew n'est pas executable.
+      # Fabric Loom 1.7 is NOT compatible with Gradle 9. The committed wrapper pins
+      # Gradle 8.10; gradle/actions/setup-gradle is avoided on purpose because it
+      # falls back to its own Gradle 9.x whenever ./gradlew is unusable.
       - name: Prepare Gradle wrapper
         run: |
           chmod +x ./gradlew
           if [ ! -f gradle/wrapper/gradle-wrapper.jar ]; then
-            echo "gradle-wrapper.jar absent, telechargement..."
+            echo "gradle-wrapper.jar missing, downloading..."
             curl -sSL --fail -o gradle/wrapper/gradle-wrapper.jar \
               https://raw.githubusercontent.com/gradle/gradle/v8.10.0/gradle/wrapper/gradle-wrapper.jar
           fi
-          unzip -t gradle/wrapper/gradle-wrapper.jar > /dev/null || { echo "gradle-wrapper.jar invalide"; exit 1; }
+          unzip -t gradle/wrapper/gradle-wrapper.jar > /dev/null || { echo "invalid gradle-wrapper.jar"; exit 1; }
           ./gradlew --version
 
       - name: Build PUBLIC variant

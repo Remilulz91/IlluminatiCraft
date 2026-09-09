@@ -1,7 +1,11 @@
 name: Release
 
-# Se declenche quand tu pousses un tag commencant par "v" (ex : v0.1.0)
+# Triggered by pushing a tag starting with "v" (e.g. v0.1.0):
 #   git tag v0.1.0 && git push origin v0.1.0
+#
+# The release ships the PUBLIC jar only. The debug jar is intentionally left out of
+# public downloads; it stays available as a Build workflow artifact (Actions tab) or
+# by building locally with: ./gradlew build -PbuildType=debug
 on:
   push:
     tags:
@@ -25,29 +29,30 @@ jobs:
           java-version: 21
           cache: gradle
 
+      # Fabric Loom 1.7 is NOT compatible with Gradle 9. The committed wrapper pins
+      # Gradle 8.10; gradle/actions/setup-gradle is avoided on purpose because it
+      # falls back to its own Gradle 9.x whenever ./gradlew is unusable.
       - name: Prepare Gradle wrapper
         run: |
           chmod +x ./gradlew
           if [ ! -f gradle/wrapper/gradle-wrapper.jar ]; then
+            echo "gradle-wrapper.jar missing, downloading..."
             curl -sSL --fail -o gradle/wrapper/gradle-wrapper.jar \
               https://raw.githubusercontent.com/gradle/gradle/v8.10.0/gradle/wrapper/gradle-wrapper.jar
           fi
-          unzip -t gradle/wrapper/gradle-wrapper.jar > /dev/null || { echo "gradle-wrapper.jar invalide"; exit 1; }
+          unzip -t gradle/wrapper/gradle-wrapper.jar > /dev/null || { echo "invalid gradle-wrapper.jar"; exit 1; }
           ./gradlew --version
 
       - name: Build PUBLIC variant
         run: ./gradlew build --stacktrace
 
-      - name: Stash public JAR
+      # Keep the mod jar only: no -sources.jar (GitHub already attaches the source
+      # archives to the release) and no debug variant.
+      - name: Collect release assets
         run: |
           mkdir -p release-artifacts
-          cp build/libs/*.jar release-artifacts/
-
-      - name: Build DEBUG variant
-        run: ./gradlew clean build -PbuildType=debug --stacktrace
-
-      - name: Stash debug JAR
-        run: cp build/libs/*.jar release-artifacts/
+          find build/libs -maxdepth 1 -name '*.jar' ! -name '*-sources.jar' -exec cp {} release-artifacts/ \;
+          ls -l release-artifacts
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

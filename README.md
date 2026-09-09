@@ -1,149 +1,150 @@
 # IlluminatiCraft
 
-Portage Fabric de l'**Illuminati Pet** du mod *Inventory Pets*, pour **Minecraft 1.21.1**.
+A Fabric port of the **Illuminati Pet** from *Inventory Pets*, for **Minecraft 1.21.1**.
 
-Un seul item, une seule ability, mais elle est bonne : un clic droit et l'Illuminati te
-donne **un item craftable au hasard**, pioché parmi *toutes* les recettes chargées —
-vanilla **et** tous les mods installés. Et si l'Illuminati te donne un Illuminati…
+One item, one ability — but it is a good one. Right-click and the Illuminati hands you
+**a random craftable item**, drawn from *every* loaded recipe: vanilla **and** every mod
+you have installed. And if the Illuminati gives you an Illuminati…
 **ILLUMINATI CONFIRMED**.
 
 ---
 
-## Fonctionnalités
+## Features
 
-| Action | Effet |
+| Action | Effect |
 |---|---|
-| **Clic droit** | Donne un item aléatoire tiré parmi toutes les recettes de craft chargées (vanilla + modées). Cooldown de **2 minutes**. |
-| **Illuminati depuis un Illuminati** | Débloque le succès **Illuminati Confirmed** (+100 XP), annonce serveur, particules totem, et joue le son `illuminati_confirmed`. |
-| **Drop de l'item (touche Q)** | Joue le son `illuminati_theme`. |
+| **Right-click** | Gives a random item drawn from every loaded crafting recipe (vanilla + modded). **2 minute** cooldown. |
+| **Illuminati from an Illuminati** | Unlocks the **Illuminati Confirmed** achievement (+100 XP), announces it server-wide, spawns totem particles and plays the `illuminati_confirmed` sound. |
+| **Dropping the item (Q key)** | Plays the `illuminati_theme` sound. |
 
-L'item est **fireproof**, ne s'empile pas, et est de rareté *Epic*.
+The item is **fireproof**, does not stack, and is *Epic* rarity.
 
-### Comment l'obtenir
+### How to obtain it
 
-1. **Craft** (recette en pyramide) :
+1. **Crafting** (pyramid recipe):
 
    ```
-    G       G = Lingot d'or
-   GEG      E = Œil de l'Ender
-   ONO      O = Obsidienne
+    G       G = Gold Ingot
+   GEG      E = Eye of Ender
+   ONO      O = Obsidian
             N = Nether Star
    ```
 
-2. **Coffres de structures** : 2 % par coffre (donjons, mineshafts, bibliothèque de
-   forteresse, pyramide, temple de la jungle, manoir, avant-poste, forteresse du Nether,
-   bastion, cité antique, trésor enfoui, épave, cité de l'End). Configurable.
+2. **Structure chests**: 2% per chest — dungeons, mineshafts, stronghold library,
+   desert pyramid, jungle temple, woodland mansion, pillager outpost, nether fortress,
+   bastion treasure, ancient city, buried treasure, shipwreck treasure, end city
+   treasure. Configurable.
 
-3. **Menu créatif** (onglet Outils & Utilitaires) et `/illuminati give`.
+3. **Creative menu** (Tools & Utilities tab) and `/illuminati give`.
 
 ---
 
-## Commandes
+## Commands
 
-Toutes en niveau de permission 2 (OP) :
+All require permission level 2 (OP):
 
 ```
-/illuminati give [joueurs] [nombre]   # donne des Illuminati Pet
-/illuminati info                      # nb d'items piochables, cooldown, config active
-/illuminati reload                    # recharge la config + reconstruit le cache de recettes
-/illuminati cooldown reset [joueurs]  # remet le cooldown à zéro
+/illuminati give [players] [count]   # hand out Illuminati Pets
+/illuminati info                     # drawable item count, cooldown, active config
+/illuminati reload                   # reload the config and rebuild the recipe cache
+/illuminati cooldown reset [players] # clear the cooldown
 ```
 
 ---
 
 ## Configuration
 
-Fichier : `config/illuminaticraft.json` — également éditable en jeu via **Mod Menu +
+File: `config/illuminaticraft.json` — also editable in game through **Mod Menu +
 Cloth Config**.
 
-| Option | Défaut | Description |
+| Option | Default | Description |
 |---|---|---|
-| `cooldownSeconds` | `120` | Délai entre deux clics droits. |
-| `craftingRecipesOnly` | `true` | `false` = les recettes de fourneau, forge, etc. entrent aussi dans le tirage. |
-| `giveFullRecipeOutput` | `true` | Donne la quantité complète de la recette (ex. 4 planches) plutôt qu'un seul item. |
-| `selfDrawBoostPercent` | `1.0` | Chance forcée (%) de tirer l'Illuminati lui-même. **`0.0` = 100 % aléatoire**, fidèle à Inventory Pets — mais le succès devient quasi inatteignable (~1/1500 en vanilla pur). |
-| `broadcastDraws` | `false` | Annonce chaque tirage à tout le serveur. |
-| `blacklistedItems` / `blacklistedNamespaces` | cf. fichier | Items/namespaces exclus du tirage (command blocks, barrier… par défaut). |
-| `enableCustomSounds` | `true` | Active les sons du mod. |
-| `dropSoundGlobal` | `false` | `true` = le thème au drop est entendu par tout le serveur. |
-| `soundVolume` | `1.0` | Volume des sons custom. |
-| `addToCreativeTab` | `true` | Ajoute l'item au menu créatif (redémarrage requis). |
-| `enableChestLoot` | `true` | Injection dans les loot tables de coffres. |
-| `chestLootChance` | `0.02` | Chance par coffre concerné. |
+| `cooldownSeconds` | `120` | Delay between two right-clicks. |
+| `craftingRecipesOnly` | `true` | `false` also draws from smelting, smithing, etc. |
+| `giveFullRecipeOutput` | `true` | Give the full recipe output (e.g. 4 planks) instead of a single item. |
+| `selfDrawBoostPercent` | `1.0` | Forced chance (%) of drawing the Illuminati itself. **`0.0` = fully random**, faithful to Inventory Pets — but the achievement becomes nearly unreachable (~1 in 1500 in pure vanilla). |
+| `broadcastDraws` | `false` | Announce every draw to the whole server. |
+| `blacklistedItems` / `blacklistedNamespaces` | see file | Items/namespaces excluded from the draw (command blocks, barrier… by default). |
+| `enableCustomSounds` | `true` | Enable the mod's sounds. |
+| `dropSoundGlobal` | `false` | `true` makes the drop theme audible server-wide. |
+| `soundVolume` | `1.0` | Custom sound volume. |
+| `addToCreativeTab` | `true` | Add the item to the creative menu (requires a restart). |
+| `enableChestLoot` | `true` | Inject the item into chest loot tables. |
+| `chestLootChance` | `0.02` | Chance per targeted chest. |
 
 ---
 
-## Sons
+## Sounds
 
-Deux sons, deux statuts différents.
+Two sounds, two different situations.
 
-### `illuminati_confirmed.ogg` — distribué avec le mod ✅
+### `illuminati_confirmed.ogg` — shipped with the mod
 
-*Also sprach Zarathustra* (Strauss, 1896 — domaine public), dans l'interprétation dirigée
-par **Philip Milman**, publiée sous **CC BY 4.0**. Cette licence autorise explicitement la
-redistribution, y compris dans un projet publié, à condition de créditer. L'attribution
-complète est dans [CREDITS.md](CREDITS.md), embarqué dans le `.jar`.
+*Also sprach Zarathustra* (Strauss, 1896 — public domain) in the performance conducted by
+**Philip Milman**, released under **CC BY 4.0**. That license explicitly allows
+redistribution, including inside a published project, as long as credit is given. Full
+attribution lives in [CREDITS.md](CREDITS.md), which is bundled inside the JAR.
 
-### `illuminati_theme.ogg` — placeholder silencieux ⚠️
+### `illuminati_theme.ogg` — silent placeholder
 
-Le thème de *X-Files* (Mark Snow, 1993) est protégé et **il n'en existe aucune version
-sous licence libre**. Le dépôt et le `.jar` ne contiennent donc qu'un silence de 3 s
-pour ce slot. Deux façons de le remplir :
+The X-Files theme (Mark Snow, 1993) is copyrighted and **no freely licensed version of it
+exists**. The repository and the JAR therefore ship a 3-second silence for this slot.
+Two ways to fill it:
 
-- **usage privé** : passer par le resource pack séparé (`IlluminatiCraft-Soundpack`),
-  qui écrase les assets du mod sans jamais entrer dans le dépôt ;
-- **publication** : utiliser un morceau d'ambiance mystère/conspiration sous **CC0 ou
-  CC BY 4.0** (Musopen, filmmusic.io, incompetech), et l'ajouter à `CREDITS.md`.
+- **private use**: use the separate resource pack, which overrides the mod's assets
+  without ever entering the repository;
+- **publishing**: pick a mystery/conspiracy ambient track under **CC0 or CC BY 4.0**
+  (Musopen, filmmusic.io, incompetech) and add it to `CREDITS.md`.
 
-> Attention au vocabulaire : « royalty-free » ne veut pas dire « domaine public ». Beaucoup
-> de licences royalty-free interdisent la redistribution du fichier audio tel quel — ce qui
-> est exactement ce que fait un mod ou un resource pack. Seules **CC0** et **CC BY**
-> l'autorisent sans ambiguïté.
+> Careful with the wording: "royalty-free" does not mean "public domain". Many
+> royalty-free licenses forbid redistributing the audio file as-is — which is exactly what
+> a mod or a resource pack does. Only **CC0** and **CC BY** allow it unambiguously.
 
-### Contraintes techniques
+### Technical requirements
 
-- format **OGG Vorbis** obligatoire (Minecraft ne lit ni le MP3 ni le WAV) ;
-- **mono obligatoire** — Minecraft ne spatialise pas le stéréo ;
-- durées : ~10–20 s pour le thème au drop (il se déclenche souvent), jusqu'à ~2 min pour
-  le son du succès (événement rare) ;
-- conversion :
+- **OGG Vorbis** only (Minecraft reads neither MP3 nor WAV);
+- **mono required** — Minecraft does not spatialize stereo files;
+- length: ~10–20 s for the drop theme (it triggers often), up to ~2 min for the
+  achievement sound (rare event);
+- conversion:
   ```bash
   ffmpeg -i source.mp3 -ac 1 -ar 44100 -c:a libvorbis -q:a 5 illuminati_confirmed.ogg
   ```
 
 ---
 
-## Build
+## Building
 
 ```bash
-./gradlew build                       # build PUBLIC  -> build/libs/illuminaticraft-0.1.0.jar
-./gradlew build -PbuildType=debug     # build DEBUG   -> build/libs/illuminaticraft-0.1.0-debug.jar
+./gradlew build                       # PUBLIC build -> build/libs/illuminaticraft-0.1.0.jar
+./gradlew build -PbuildType=debug     # DEBUG build  -> build/libs/illuminaticraft-0.1.0-debug.jar
 ```
 
-Le build DEBUG désactive le cooldown et active les flags de debug — pratique pour
-tester le succès *Illuminati Confirmed* sans attendre 2 minutes entre chaque essai.
+The DEBUG build disables the cooldown and turns the debug flags on — handy for testing the
+*Illuminati Confirmed* achievement without waiting two minutes between attempts. It is
+**not** attached to releases; grab it from the Actions tab artifacts or build it locally.
 
-Le `.jar` se place dans le dossier `mods/` d'une instance **Fabric 1.21.1** avec
-**Fabric API**. Cloth Config et Mod Menu sont optionnels (écran de config uniquement).
+Drop the JAR into the `mods/` folder of a **Fabric 1.21.1** instance with **Fabric API**.
+Cloth Config and Mod Menu are optional (config screen only).
 
-Voir [SETUP.md](SETUP.md) pour l'installation de l'environnement de dev.
-
----
-
-## CI GitHub
-
-- `.github/workflows/build.yml` — build à chaque push sur `main`/`develop`, les deux
-  `.jar` sont uploadés en artefacts (14 jours de rétention).
-- `.github/workflows/release.yml` — sur un tag `v*`, crée une **Release GitHub** avec
-  les deux `.jar` attachés et le contenu de `CHANGELOG.md` en description.
+See [SETUP.md](SETUP.md) for the development environment.
 
 ---
 
-## Crédits
+## GitHub CI
 
-- Créateur et mainteneur : **Remilulz_91** — [@Remilulz91](https://github.com/Remilulz91)
-- Concept original : **Illuminati Pet** du mod *Inventory Pets* (Purplicious_Cow).
-- Musique : *Also sprach Zarathustra* dirigée par [Philip Milman](https://pmmusic.pro/),
+- `.github/workflows/build.yml` — builds on every push to `main`/`develop`; both JARs are
+  uploaded as artifacts (14 day retention).
+- `.github/workflows/release.yml` — on a `v*` tag, creates a **GitHub Release** with the
+  public JAR attached and `CHANGELOG.md` as the body.
+
+---
+
+## Credits
+
+- Creator and maintainer: **Remilulz_91** — [@Remilulz91](https://github.com/Remilulz91)
+- Original concept: the **Illuminati Pet** from *Inventory Pets* (Purplicious_Cow).
+- Music: *Also sprach Zarathustra* conducted by [Philip Milman](https://pmmusic.pro/),
   [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) —
   [source](https://www.youtube.com/watch?v=9K3GQdD30F0).
-- Licence du code : MIT. Détail complet des attributions dans [CREDITS.md](CREDITS.md).
+- Code license: MIT. Full attribution details in [CREDITS.md](CREDITS.md).
