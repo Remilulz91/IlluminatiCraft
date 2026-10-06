@@ -69,6 +69,15 @@ Cloth Config**.
 | `notifyWhenReady` | `true` | Announce above the hotbar when the cooldown ends. |
 
 Action bar messages stay up for 5 seconds. The cooldown persists across relogins and world reloads — it is stored per player in `illuminaticraft-cooldowns.json` inside the world folder.
+
+> **Known cosmetic quirk after a relogin.** The white overlay on the item slot is drawn by
+> Minecraft from `ItemCooldownManager.getCooldownProgress()`, which is a fraction of the
+> *current* cooldown entry — and `set()` always starts that entry at the present tick. When
+> a partial cooldown is restored on join, the overlay therefore restarts from full and
+> drains over exactly the time that is left, while the text above the hotbar shows the true
+> remaining time (`1:30` on a 2-minute cooldown, say). Nothing is out of sync: both reach
+> zero at the same moment. Making the overlay start part-filled would require reaching into
+> a private vanilla field, which is not worth the coupling for a visual detail.
 | `blacklistedItems` / `blacklistedNamespaces` | see file | Items/namespaces excluded from the draw (command blocks, barrier… by default). |
 | `enableCustomSounds` | `true` | Enable the mod's sounds. |
 | `themeSoundGlobal` | `false` | `true` makes the draw theme audible to the whole server. |
